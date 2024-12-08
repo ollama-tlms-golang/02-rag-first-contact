@@ -1,0 +1,13 @@
+services:
+
+  ai-workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GO_VERSION=1.23.1
+        - USER_NAME=${USER}
+    volumes:
+      - ../..:/workspaces:cached      
+    command: sleep infinity
+

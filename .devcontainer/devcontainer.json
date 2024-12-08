@@ -1,0 +1,39 @@
+{
+	"name": "Ollama and Go",
+
+	"dockerComposeFile": "compose.yml",
+	"service": "ai-workspace",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"vallyscode.crayons",
+				"pkief.material-icon-theme",
+				"pkief.material-product-icons",
+				"aaron-bond.better-comments",
+				"equinusocio.vsc-material-theme",
+				"vallyscode.crayons",
+				"irongeek.vscode-env",
+				"hediet.vscode-drawio",
+				"bierner.markdown-mermaid",
+				"Sujan.code-green"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {
+		  "version": "latest"
+		}
+	},
+    "remoteEnv": {
+		"OLLAMA_HOST": "http://host.docker.internal:11434"
+    },
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached",
+	],
+	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+	"remoteUser": "${localEnv:USER}"
+}
+
