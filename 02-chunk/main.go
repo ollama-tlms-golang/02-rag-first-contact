@@ -36,7 +36,7 @@ func main() {
 	If you need information about the Aethelgard and its species, refer only to the provided content.
 	`
 
-	question := "Explain the biological compatibility of the Human species?"
+	question := "Explain the biological compatibility of the Human species"
 
 	context, err := os.ReadFile("../content/chronicles-of-aethelgard.md")
 	if err != nil {
@@ -95,7 +95,6 @@ func main() {
 		fmt.Println("🔍 Prompt:", similarity.Prompt)
 		fmt.Println("🔍 Cosine similarity:", similarity.CosineSimilarity)
 		fmt.Println("--------------------------------------------------")
-
 	}
 
 	// Create a new context with the top 5 chunks

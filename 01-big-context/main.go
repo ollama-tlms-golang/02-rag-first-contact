@@ -38,42 +38,36 @@ func main() {
 		log.Fatalln("😡", err)
 	}
 
-	//fmt.Println(string(context))
+	question := "Explain the biological compatibility of the Human species"
 
-	askMeAnything := func(question string) {
-		// Prompt construction
-		messages := []api.Message{
-			{Role: "system", Content: systemInstructions},
-			{Role: "system", Content: "CONTENT:\n" + string(context)},
-			{Role: "user", Content: question},
-		}
-
-		req := &api.ChatRequest{
-			Model:    "qwen2.5:0.5b",
-			Messages: messages,
-			Options: map[string]interface{}{
-				"temperature":    0.0,
-				"repeat_last_n":  2,
-				"repeat_penalty": 1.8,
-				"top_k":          10,
-				"top_p":          0.5,
-			},
-			Stream: &TRUE,
-		}
-
-		err := client.Chat(ctx, req, func(resp api.ChatResponse) error {
-			fmt.Print(resp.Message.Content)
-			return nil
-		})
-
-		if err != nil {
-			log.Fatalln("😡", err)
-		}
-		fmt.Println()
-		fmt.Println()
+	// Prompt construction
+	messages := []api.Message{
+		{Role: "system", Content: systemInstructions},
+		{Role: "system", Content: "CONTENT:\n" + string(context)},
+		{Role: "user", Content: question},
 	}
 
-	askMeAnything("Explain the biological compatibility of the Human species?")
-	fmt.Println("--------------------------------------------------")
+	req := &api.ChatRequest{
+		Model:    "qwen2.5:0.5b",
+		Messages: messages,
+		Options: map[string]interface{}{
+			"temperature":    0.0,
+			"repeat_last_n":  2,
+			"repeat_penalty": 1.8,
+			"top_k":          10,
+			"top_p":          0.5,
+		},
+		Stream: &TRUE,
+	}
+
+	err = client.Chat(ctx, req, func(resp api.ChatResponse) error {
+		fmt.Print(resp.Message.Content)
+		return nil
+	})
+
+	if err != nil {
+		log.Fatalln("😡", err)
+	}
+	fmt.Println()
 
 }
